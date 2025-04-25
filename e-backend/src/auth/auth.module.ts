@@ -7,6 +7,8 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { User, UserSchema } from '../users/schemas/user.schema';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { MailerModule } from '../mailer/mailer.module';
+import { RedisModule } from '../cache/redis.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { JwtStrategy } from './strategies/jwt.strategy';
       }),
     }),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    MailerModule,
+    RedisModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
